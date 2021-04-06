@@ -11,17 +11,17 @@ const DataBody = () => {
             const month = dateArray[1];
             const dayArray = dateArray[2].split("T");
             const day = dayArray[0];
-            const formattedDate = [month, day, year].join("-");
+            const formattedDate = [month, day, year].join("/");
             return formattedDate;
       }
 
       return (
             <tbody>
-                  {context.devState.filteredUsers[0] !== undefined && context.devState.filteredUsers[0].name !== undefined ? (
-                        context.devState.filteredUsers.map(({ login, name, picture, phone, email, dob }) => {
+                  {context.state.filteredUsersArray[0] !== undefined && context.state.filteredUsersArray[0].name !== undefined ? (
+                        context.state.filteredUsersArray.map(({ login, name, picture, phone, email, dob }) => {
                               return (
                                     <tr key={login.uuid}>
-                                          <td data-th="Image" className="align-middle">
+                                          <td data-th="Profile Picture" className="align-middle">
                                                 <img
                                                       src={picture.medium}
                                                       alt={"profile image for " + name.first + " " + name.last}
@@ -31,7 +31,7 @@ const DataBody = () => {
                                           <td data-th="Name" className="name-cell align-middle">
                                                 {name.first} {name.last}
                                           </td>
-                                          <td data-th="Phone" className="align-middle">
+                                          <td data-th="Phone Number" className="align-middle">
                                                 {phone}
                                           </td>
                                           <td data-th="Email" className="align-middle">
@@ -39,7 +39,7 @@ const DataBody = () => {
                                                       {email}
                                                 </a>
                                           </td>
-                                          <td data-th="DOB" className="align-middle">
+                                          <td data-th="Date of Birth" className="align-middle">
                                                 {formatDate(dob.date)}
                                           </td>
                                     </tr>

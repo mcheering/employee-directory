@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import Nav from "./Nav";
@@ -5,11 +6,11 @@ import API from "../utils/API";
 import "../styles/DataArea.css";
 import DataAreaContext from "../utils/DataAreaContext";
 
-const DataArea = () => {
-      const [devState, setDevState] = useState({
-            users: [],
+const Area = () => {
+      const [state, setState] = useState({
+            usersArray: [],
             order: "descend",
-            filteredUsers: [],
+            filteredUsersArray: [],
             headings: [
                   { name: "Image", width: "10%", order: "descend" },
                   { name: "name", width: "10%", order: "descend" },
@@ -17,10 +18,10 @@ const DataArea = () => {
                   { name: "email", width: "20%", order: "descend" },
                   { name: "dob", width: "10%", order: "descend" }
             ]
-      });
+      })
 
-      const sort = heading => {
-            let currentOrder = devState.headings
+      const sortEmployees = heading => {
+            let currentOrder = state.headings
                   .filter(elem => elem.name === heading)
                   .map(elem => elem.order)
                   .toString();
@@ -30,8 +31,7 @@ const DataArea = () => {
             } else {
                   currentOrder = "descend";
             }
-
-            const compareFunction = (a, b) => {
+            const compareOrderFunction = (a, b) => {
                   if (currentOrder === "ascend") {
                         if (a[heading] === undefined) {
                               return 1;
@@ -59,55 +59,52 @@ const DataArea = () => {
                               return b[heading].localeCompare(a[heading]);
                         }
                   }
-            };
-            const sortedUsers = devState.filteredUsers.sort(compareFunction);
-            const updatedHeadings = devState.headings.map(elem => {
-                  elem.order = elem.name === heading ? currentOrder : elem.order;
-                  return elem;
-            });
-
-            setDevState({
-                  ...devState,
-                  filteredUsers: sortedUsers,
+            }
+            const orderedUsers = state.filteredUsersArray.sort(compareOrderFunction)
+            console.log(orderedUsers)
+            const updatedHeadings = state.headings.map((elem) => {
+                  elem.order = elem.name === heading ? currentOrder : elem.order
+                  return elem
+            })
+            setState({
+                  ...state,
+                  filteredUsersArray: orderedUsers,
                   headings: updatedHeadings
-            });
-      };
+            })
+      }
 
-      const searchChange = event => {
-            const filter = event.target.value;
+      const search = (event) => {
+            const filter = event.target.value
+
             // eslint-disable-next-line array-callback-return
-            const filteredList = devState.users.filter((item) => {
-                  let values = item.name.first.toLowerCase() + " " + item.name.last.toLowerCase();
-                  console.log(filter, values)
+            const filteredTable = state.users.filter((item) => {
+                  let values = item.name.first.toLowerCase() + " " + item.name.last.toLowerCase()
                   if (values.indexOf(filter.toLowerCase()) !== -1) {
                         return item
-                  };
-            });
+                  }
+            })
 
-            setDevState({ ...devState, filteredUsers: filteredList });
-      };
+            setState({ ...state, filteredUsersArray: filteredTable })
+      }
+
       useEffect(() => {
-            API.getUsers().then(results => {
-                  console.log(results.data.results);
-                  setDevState({
-                        ...devState,
+            API.getUsers().then((results) => {
+                  setState({
+                        ...state,
                         users: results.data.results,
-                        filteredUsers: results.data.results
-                  });
-            });
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
-
+                        filteredUsersArray: results.data.results
+                  })
+            })
+      }, [])
       return (
-            <DataAreaContext.Provider
-                  value={{ devState, searchChange, sort }}
-            >
+            <DataAreaContext.Provider value={{ state, search, sortEmployees }}>
                   <Nav />
                   <div className="data-area">
-                        {devState.filteredUsers.length > 0 ? <DataTable /> : <div></div>}
+                        {state.filteredUsersArray.length > 0 ? <DataTable /> : <div>
+                        </div>}
                   </div>
             </DataAreaContext.Provider>
-      );
-};
+      )
+}
 
-export default DataArea;
+export default Area

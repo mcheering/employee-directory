@@ -18,7 +18,7 @@ const SearchName = () => {
                               type="search"
                               placeholder="name"
                               aria-label="Search"
-                              onChange={e => context.handleSearchChange(e)}
+                              onChange={(e) => context.search(e)}
                         />
                   </div>
             </div>

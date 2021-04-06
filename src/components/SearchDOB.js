@@ -9,11 +9,11 @@ const SearchDOB = () => {
                   <div className="input-group">
                         <div className="input-group-prepend">
                               <span className="input-group-text" id="">
-                                    DOB
+                                    Date of Birth
           </span>
                         </div>
-                        <input type="date" className="form-control" onChange={e => context.handleSearchChange(e)} />
-                        <input type="date" className="form-control" onChange={e => context.handleSearchChange(e)} />
+                        <input type="date" className="form-control" onChange={(e) => context.search(e)} />
+                        <input type="date" className="form-control" onChange={(e) => context.search(e)} />
                   </div>
             </div>
       );

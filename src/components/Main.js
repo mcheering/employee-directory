@@ -1,11 +1,11 @@
 import React from "react";
-import DataArea from "./DataArea";
+import Area from "./Area";
 import "../styles/Main.css";
 
 function Main() {
       return (
             <>
-                  <DataArea />
+                  <Area />
             </>
       );
 };
