@@ -31,6 +31,7 @@ const Area = () => {
             } else {
                   currentOrder = "descend";
             }
+
             const compareOrderFunction = (a, b) => {
                   if (currentOrder === "ascend") {
                         if (a[heading] === undefined) {
