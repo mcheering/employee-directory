@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import "../styles/DataBody.css";
-import DataAreaContext from "../utils/DataAreaContext";
+import "../styles/TableBody.css";
+import DataAreaContext from "../utils/AreaContext";
 
 const DataBody = () => {
       const context = useContext(DataAreaContext);
@@ -24,7 +24,7 @@ const DataBody = () => {
                                           <td data-th="Profile Picture" className="align-middle">
                                                 <img
                                                       src={picture.medium}
-                                                      alt={"profile image for " + name.first + " " + name.last}
+                                                      alt={name.first + " " + name.last + "profile pic"}
                                                       className="img-responsive"
                                                 />
                                           </td>

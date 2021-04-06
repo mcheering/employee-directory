@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import DataTable from "./DataTable";
-import Nav from "./Nav";
+import DataTable from "./Table";
+import Nav from "./Navbar";
 import API from "../utils/API";
-import "../styles/DataArea.css";
-import DataAreaContext from "../utils/DataAreaContext";
+import "../styles/Area.css";
+import DataAreaContext from "../utils/AreaContext";
 
 const Area = () => {
       const [state, setState] = useState({
