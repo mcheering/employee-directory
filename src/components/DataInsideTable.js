@@ -1,3 +1,5 @@
+/* eslint-disable no-fallthrough */
+/* eslint-disable default-case */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import DataTable from "./Table";
@@ -22,8 +24,8 @@ const DataInsideTable = () => {
 
       const sortEmployees = tableHeading => {
             let Order = state.headings
-                  .filter((elem) => elem.name === tableHeading)
-                  .map((elem) => elem.order)
+                  .filter((element) => element.name === tableHeading)
+                  .map((element) => element.order)
                   .toString();
 
             if (Order === "descend") {
@@ -32,40 +34,45 @@ const DataInsideTable = () => {
                   Order = "descend";
             }
 
-            const compareOrderFunction = (comaprisonValueA, comaprisonValueB) => {
-                  if (Order === "ascend") {
-                        if (comaprisonValueA[tableHeading] === undefined) {
-                              return 1;
-                        } else if (comaprisonValueB[tableHeading] === undefined) {
-                              return -1;
-                        }
-                        else if (tableHeading === "name") {
-                              return comaprisonValueA[tableHeading].first.localeCompare(comaprisonValueB[tableHeading].first);
-                        } else if (tableHeading === "dob") {
-                              return comaprisonValueA[tableHeading].age - comaprisonValueB[tableHeading].age;
-                        } else {
-                              return comaprisonValueA[tableHeading].localeCompare(comaprisonValueB[tableHeading]);
-                        }
-                  } else {
-                        if (comaprisonValueA[tableHeading] === undefined) {
-                              return 1;
-                        } else if (comaprisonValueB[tableHeading] === undefined) {
-                              return -1;
-                        }
-                        else if (tableHeading === "name") {
-                              return comaprisonValueB[tableHeading].first.localeCompare(comaprisonValueA[tableHeading].first);
-                        } else if (tableHeading === "dob") {
-                              return comaprisonValueB[tableHeading].age - comaprisonValueA[tableHeading].age;
-                        } else {
-                              return comaprisonValueB[tableHeading].localeCompare(comaprisonValueA[tableHeading]);
-                        }
+            const compareOrder = (comaprisonValueA, comaprisonValueB) => {
+                  switch (true) {
+                        case (Order === "ascend"):
+                              switch (true) {
+                                    case (comaprisonValueA[tableHeading] === undefined):
+                                          return 1
+                                    case (comaprisonValueB[tableHeading] === undefined):
+                                          return -1
+                                    case (tableHeading === "name"):
+                                          return comaprisonValueA[tableHeading].first.localeCompare(comaprisonValueB[tableHeading].first)
+                                    case (tableHeading === "dob"):
+                                          return comaprisonValueA[tableHeading].age - comaprisonValueB[tableHeading].age;
+                                    default:
+                                          return comaprisonValueA[tableHeading].localeCompare(comaprisonValueB[tableHeading])
+                              }
+                        default:
+                              switch (true) {
+                                    case (comaprisonValueA[tableHeading] === undefined):
+                                          return 1
+                                    case (comaprisonValueB[tableHeading] === undefined):
+                                          return -1
+                                    case (tableHeading === "name"):
+                                          return comaprisonValueB[tableHeading].first.localeCompare(comaprisonValueA[tableHeading].first)
+                                    case (tableHeading === "dob"):
+                                          return comaprisonValueB[tableHeading].age - comaprisonValueA[tableHeading].age
+                                    default:
+                                          return comaprisonValueB[tableHeading].localeCompare(comaprisonValueA[tableHeading])
+
+                              }
+
+
+
                   }
             }
-            const orderedUsers = state.filteredUsersArray.sort(compareOrderFunction)
+            const orderedUsers = state.filteredUsersArray.sort(compareOrder)
             console.log(orderedUsers)
-            const updatedTableHeadings = state.headings.map((elem) => {
-                  elem.order = elem.name === tableHeading ? Order : elem.order
-                  return elem
+            const updatedTableHeadings = state.headings.map((element) => {
+                  element.order = element.name === tableHeading ? Order : element.order
+                  return element
             })
             setState({
                   ...state,

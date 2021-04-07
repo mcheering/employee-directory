@@ -18,7 +18,7 @@ const SearchName = () => {
                               type="search"
                               placeholder="name"
                               aria-label="Search"
-                              onChange={(e) => tableContext.search(e)}
+                              onChange={(event) => tableContext.search(event)}
                         />
                   </div>
             </div>
