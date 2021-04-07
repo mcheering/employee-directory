@@ -22,8 +22,8 @@ const DataInsideTable = () => {
 
       const sortEmployees = tableHeading => {
             let Order = state.headings
-                  .filter(elem => elem.name === tableHeading)
-                  .map(elem => elem.order)
+                  .filter((elem) => elem.name === tableHeading)
+                  .map((elem) => elem.order)
                   .toString();
 
             if (Order === "descend") {
@@ -40,7 +40,7 @@ const DataInsideTable = () => {
                               return -1;
                         }
                         else if (tableHeading === "name") {
-                              return comaprisonValueA[tableHeading].first.localeCompare(comaprisonValueB[tableHeading]);
+                              return comaprisonValueA[tableHeading].first.localeCompare(comaprisonValueB[tableHeading].first);
                         } else if (tableHeading === "dob") {
                               return comaprisonValueA[tableHeading].age - comaprisonValueB[tableHeading].age;
                         } else {
