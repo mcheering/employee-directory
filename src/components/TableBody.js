@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "../styles/TableBody.css";
-import DataAreaContext from "../utils/AreaContext";
+import DataAreaContext from "../utils/TableDataContext";
 
 const DataBody = () => {
-      const context = useContext(DataAreaContext);
+      const tableContext = useContext(DataAreaContext);
 
       function formatDate(date) {
             const dateArray = date.split("-");
@@ -17,11 +17,11 @@ const DataBody = () => {
 
       return (
             <tbody>
-                  {context.state.filteredUsersArray[0] !== undefined && context.state.filteredUsersArray[0].name !== undefined ? (
-                        context.state.filteredUsersArray.map(({ login, name, picture, phone, email, dob }) => {
+                  {tableContext.state.filteredUsersArray[0] !== undefined && tableContext.state.filteredUsersArray[0].name !== undefined ? (
+                        tableContext.state.filteredUsersArray.map(({ login, name, picture, phone, email, dob }) => {
                               return (
                                     <tr key={login.uuid}>
-                                          <td data-th="Profile Picture" className="align-middle">
+                                          <td data-th="Image" className="align-middle">
                                                 <img
                                                       src={picture.medium}
                                                       alt={name.first + " " + name.last + "profile pic"}

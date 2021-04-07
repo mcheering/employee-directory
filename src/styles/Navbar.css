@@ -1,10 +1,8 @@
 .navbar {
-  padding: 20px 25px;
-  margin: 0 auto;
+  padding: 25px;
 }
 
 .navbar-collapse {
-  margin: 0 auto;
   justify-content: center;
   align-items: flex-start;
 }
@@ -14,4 +12,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin: auto;
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Wrapper({ children }) {
+function Container({ children }) {
       return (
-            <div className="wrapper">
+            <div className="Container">
                   { children}
             </div>
       );
 }
 
-export default Wrapper;
+export default Container;
